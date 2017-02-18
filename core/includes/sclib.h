@@ -26,6 +26,7 @@
 #define BIT_CHECK(A, B) (((A) >> B) & 1)
 
 extern int sc_memory[MEMSIZE];
+extern int sc_reg_flags;
 
 int sc_memoryInit    ();
 int sc_memorySet     (int address, int value);
