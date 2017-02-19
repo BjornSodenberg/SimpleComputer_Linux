@@ -27,6 +27,8 @@
 
 extern int sc_memory[MEMSIZE];
 extern int sc_reg_flags;
+extern const int correct_ops[];
+extern const int ops_num;
 
 int sc_memoryInit    ();
 int sc_memorySet     (int address, int value);
@@ -38,5 +40,6 @@ int sc_regSet        (int register, int value);
 int sc_regGet        (int register, int* value);
 int sc_commandEncode (int command, int operand, int* value);
 int sc_commandDecode (int value, int* command, int* operand);
+int int_cmp(const void *a, const void *b);
 
 #endif
