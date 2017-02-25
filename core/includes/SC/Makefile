@@ -9,7 +9,7 @@ OBJS = $(SRCS:.c=.o)
 
 all:
 	$(CC) $(CFLAGS) -c $(SRCS)
-	ar rvs ../lib/libsclib.a $(OBJS)
+	ar rvs ../../lib/libsclib.a $(OBJS)
 
 clean:
 	rm -f *.o

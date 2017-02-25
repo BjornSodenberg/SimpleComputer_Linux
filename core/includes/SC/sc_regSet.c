@@ -13,6 +13,6 @@ int sc_regSet(int reg, int value)
 
 	}
 	else
-		return ERR_WRONG_FLAG;
+		return ERR_WF;
 	return 0;
 }

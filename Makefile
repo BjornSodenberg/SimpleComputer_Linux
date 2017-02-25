@@ -4,16 +4,16 @@ LFLAGS = -L./core/lib/
 
 .PHONY: clean
 
-all: sclib.a SimpleComputer
-
-SimpleComputer:
-	cd src && make all
+all: sclib.a SimpleComputer_test
 
 sclib.a:
-	cd core/includes && make all
+	cd core/includes/SC/ && make all
+
+SimpleComputer_test:
+	cd tests && make all
 
 clean:
-	cd core/includes && make clean
+	cd core/includes/SC/ && make clean
 	cd core/lib && rm -f *.a
-	cd src && make clean
-	rm -f *.bin SimpleComputer_Linux
+	cd tests && make clean
+	cd src && rm -f memory

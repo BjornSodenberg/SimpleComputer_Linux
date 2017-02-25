@@ -6,6 +6,6 @@ int sc_regGet(int reg, int *value)
 		*value = BIT_CHECK(sc_reg_flags, reg);
 	}
 	else
-		return ERR_WRONG_FLAG;
+		return ERR_WF;
 	return 0;
 }
