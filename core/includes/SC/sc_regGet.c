@@ -1,9 +1,9 @@
 #include "sclib.h"
 
-int sc_regGet(int reg, int *value)
+int sc_regGet(int registr, int *value)
 {
-	if ((reg >= 0) && (reg <=4)) {
-		*value = BIT_CHECK(sc_reg_flags, reg);
+	if ((registr > 0) && (registr <6)) {
+		*value = BIT_CHECK(sc_reg_flags, registr);
 	}
 	else
 		return ERR_WF;

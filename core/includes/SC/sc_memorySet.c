@@ -6,5 +6,6 @@ int sc_memorySet (int address, int value) {
 		return 0;
 	}
 	else
-		return ERR_WA;
+		sc_regSet(flg_M,1);
+  return 0;
 }

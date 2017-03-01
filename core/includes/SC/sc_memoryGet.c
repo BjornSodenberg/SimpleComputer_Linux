@@ -6,5 +6,5 @@ int sc_memoryGet (int address, int* value) {
 		return 0;
 	}
 	else
-		return ERR_WA;
+		sc_regSet(flg_M,1);
 }

@@ -1,16 +1,15 @@
 #include "sclib.h"
 
-int sc_regSet(int reg, int value)
+int sc_regSet(int registr, int value)
 {
 
-	if ((reg >= 0) && (reg <=4)) {
+	if ((registr > 0) && (registr < 6)) {
 		if (value == 1)
-			BIT_SET(sc_reg_flags, reg);
+			BIT_SET(sc_reg_flags, registr);
 		else if (value == 0)
-			BIT_CLEAR(sc_reg_flags, reg);
+			BIT_CLEAR(sc_reg_flags, registr);
 		else
 			return 0;
-
 	}
 	else
 		return ERR_WF;
