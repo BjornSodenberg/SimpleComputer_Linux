@@ -9,8 +9,6 @@ int sc_memoryLoad (char* filename) {
 	if (save == NULL)
 		return ERR_OFile;
 	nreaden = fread(sc_memory, sizeof(*sc_memory) * 100, 1, save);
-	for (i = 0; i < 100; i++)
-		sc_memory[i] &= 0x7FFF;
 	fclose(save);
 	if (nreaden != 1)
 		return ERR_FSize;

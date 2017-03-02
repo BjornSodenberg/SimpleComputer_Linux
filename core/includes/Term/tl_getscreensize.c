@@ -1,11 +1,11 @@
 #include "termlib.h"
 
 int tl_getscreensize(int*rows,int*cols){
-  struct winsize sz;
+  struct winsize size;
 
-  if(!ioctl(0, TIOCGWINSZ, &sz)){
-    *rows = sz.ws_row;
-    *cols = sz.ws_col;
+  if(!ioctl(0, TIOCGWINSZ, &size)){
+    *rows = size.ws_row;
+    *cols = size.ws_col;
     return 0;
   }
   else
