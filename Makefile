@@ -4,7 +4,7 @@ LFLAGS = -L./core/lib/
 
 .PHONY: clean
 
-all: sclib.a termlib.a SimpleComputer_test
+all: sclib.a termlib.a Tests
 
 sclib.a:
 	cd core/includes/SC/ && make all
@@ -12,7 +12,7 @@ sclib.a:
 termlib.a:
 	cd core/includes/Term/ && make all
 
-SimpleComputer_test:
+Tests:
 	cd tests && make all
 
 clean:
