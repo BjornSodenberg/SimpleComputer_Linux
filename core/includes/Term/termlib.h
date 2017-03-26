@@ -2,7 +2,14 @@
 #define TERMLIB_H
 
 #include <stdio.h>
+#include <stdlib.h>
+#include <termios.h>
 #include <sys/ioctl.h>
+#include <unistd.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <memory.h>
 
 enum colors {
 	cmd_black,

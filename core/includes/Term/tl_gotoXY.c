@@ -1,11 +1,12 @@
 #include "termlib.h"
 
 int tl_gotoXY(int X,int Y) {
-  int rows = 0,cols= 0;
-  tl_getscreensize(&rows,&cols);
-  if((Y < rows) && (X < cols) & (Y >= 0) && (X >= 0)) {
-    printf("\E[%d;%dH",Y ,X );
-    return 0;
+  char go[30];
+  sprintf(go, "\E[%d;%dH", X, Y);
+  ssize_t len = strlen(go) * sizeof(char);
+  if (write(1, go, len) < len)
+  {
+      return -1;
   }
-  return -1;
+  return 0;
 }
