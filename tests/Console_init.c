@@ -38,7 +38,7 @@ void t_memorybox()
         for (int i = 2; i < 14; ++i)
         {
             tl_gotoXY(i, j);
-            write(STDOUT_FILENO, "+0000 ", 6 * sizeof(char));
+            write(STDOUT_FILENO, "+9999 ", 6 * sizeof(char));
         }
     }
     tl_gotoXY(33, 0);
@@ -66,7 +66,7 @@ void t_counterbox()
     write(STDOUT_FILENO, " instructionCounter ", 20 * sizeof(char));
     tl_setfgcolor(cmd_magenta);
     tl_gotoXY(6, 80);
-    write(STDOUT_FILENO, "+0000", 5 * sizeof(char));
+    write(STDOUT_FILENO, "+9999", 5 * sizeof(char));
     tl_gotoXY(33, 0);
 }
 
@@ -120,10 +120,10 @@ void t_bcbox()
     bc_box(15, 1, 10, 63);
     bc_printbigchar(digit[16], 16, 2, cmd_magenta, cmd_black);
 
-    bc_printbigchar(digit[0], 16, 12, cmd_magenta, cmd_black);
-    bc_printbigchar(digit[0], 16, 22, cmd_magenta, cmd_black);
-    bc_printbigchar(digit[0], 16, 32, cmd_magenta, cmd_black);
-    bc_printbigchar(digit[0], 16, 42, cmd_magenta, cmd_black);
+    bc_printbigchar(digit[9], 16, 12, cmd_magenta, cmd_black);
+    bc_printbigchar(digit[9], 16, 22, cmd_magenta, cmd_black);
+    bc_printbigchar(digit[9], 16, 32, cmd_magenta, cmd_black);
+    bc_printbigchar(digit[9], 16, 42, cmd_magenta, cmd_black);
     tl_gotoXY(33, 0);
 }
 

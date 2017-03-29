@@ -7,21 +7,18 @@ int bc_box ( int x1, int y1, int x2, int y2 ) {
       {
           tl_gotoXY(x1 + i, y1 + j);
 
-          //corners
           if (i == 0 && j == 0)
-              bc_printA("l");
+              bc_printA(BOXCHAR_TL);
           else if (i == 0 && j == y2 - 1)
-              bc_printA("k\n");
+              {bc_printA(BOXCHAR_TR);bc_printA("\n");}
           else if (i == x2 - 1 && j == 0)
-              bc_printA("m");
+              bc_printA(BOXCHAR_BL);
           else if (i == x2 - 1 && j == y2 - 1)
-              bc_printA("j\n");
-          else if ( (i == 0 || i == x2 - 1) && (j > 0 && j < y2) ) // horizontal line
-              bc_printA("q");
-          else if ( (i > 0 && i < x2) && (j == 0 || j == y2 -1)) // vertical line
-              bc_printA("x");
-          else
-              write(1, " ", sizeof(char));
+              {bc_printA(BOXCHAR_BR);bc_printA("\n");}
+          else if ( (i == 0 || i == x2 - 1) && (j > 0 && j < y2) )
+              bc_printA(BOXCHAR_HOR);
+          else if ( (i > 0 && i < x2) && (j == 0 || j == y2 -1))
+              bc_printA(BOXCHAR_VERT);
       }
   }
   return 0;

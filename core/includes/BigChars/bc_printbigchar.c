@@ -11,7 +11,7 @@ int bc_printbigchar ( int*big, int x, int y,
 					int value;
 					bc_getbigcharpos(big, i, j, &value);
 					if (!value)
-							write(STDOUT_FILENO, " ", sizeof(char));
+							write(1, " ", sizeof(char));
 					else
 							bc_printA("a");
 			}
