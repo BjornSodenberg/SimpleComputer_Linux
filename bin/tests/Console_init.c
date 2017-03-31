@@ -1,5 +1,5 @@
-#include "../core/includes/BigChars/bigchrlib.h"
-#include "../core/includes/Term/termlib.h"
+#include "../../core/includes/BigChars/bigchrlib.h"
+#include "../../core/includes/Term/termlib.h"
 #include <stdio.h>
 #include <fcntl.h>
 #include <stdlib.h>
@@ -141,9 +141,20 @@ void t_init()
 int main(int argc, char const *argv[]) {
   tl_clrscr();
   t_init();
-  while(1){
-    tl_gotoXY(33, 0);
-  }
+
+  tl_gotoXY(30, 0);
+
+  int fd;
+  fd = open("file",O_WRONLY);
+  bc_bigcharwrite(fd,digit[9],5);
+  close(fd);
+
+  int tcount = 0;
+  fd = open("file",O_RDONLY);
+  bc_bigcharread(fd,digit[9],1,&tcount);
+  close(fd);
+
+  tl_gotoXY(33, 0);
 
   return 0;
 }

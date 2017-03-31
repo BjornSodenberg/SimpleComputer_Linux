@@ -1,4 +1,4 @@
-#include "../core/includes/SC/sclib.h"
+#include "../../core/includes/SC/sclib.h"
 
 int main(int argc, char const *argv[]) {
   int mem1, mem2;

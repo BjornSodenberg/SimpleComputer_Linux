@@ -17,4 +17,5 @@ int bc_printbigchar ( int*big, int x, int y,
 			}
 			write(1, "\n", sizeof(char));
 	}
+	return 0;
 }

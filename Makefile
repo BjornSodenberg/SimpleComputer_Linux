@@ -1,10 +1,10 @@
 CC = gcc
-CFLAGS = -g
+CFLAGS = -g -Wall
 LFLAGS = -L./core/lib/
 
 .PHONY: clean
 
-all: sclib.a termlib.a bigcharlib.a Tests 
+all: sclib.a termlib.a bigcharlib.a readkeylib.a Anthill
 
 sclib.a:
 	cd core/includes/SC/ && make all
@@ -15,13 +15,20 @@ termlib.a:
 bigcharlib.a:
 	cd core/includes/BigChars/ && make all
 
+readkeylib.a:
+	cd core/includes/ReadKey/ && make all
+
 Tests:
-	cd tests && make all
+	cd bin/tests && make all
+
+Anthill:
+	cd bin/ && make all
 
 clean:
 	cd core/includes/SC/ && make clean
 	cd core/includes/Term/ && make clean
 	cd core/includes/BigChars && make clean
+	cd core/includes/ReadKey && make clean
 	cd core/lib && rm -f *.a
-	cd tests && make clean
+	cd bin/tests && make clean
 	cd src && rm -f memory

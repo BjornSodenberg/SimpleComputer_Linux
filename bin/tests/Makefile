@@ -1,7 +1,7 @@
 CC = gcc
 CFLAGS = -g
-INCLUDE = -I../core/includes/SC -I../core/includes/Term -I../core/includes/BigChars
-LIBS = -L../core/lib
+INCLUDE = -I../../core/includes/SC -I../../core/includes/Term -I../../core/includes/BigChars
+LIBS = -L../../core/lib
 LFLAG = -lsclib -ltermlib -lbigcharlib
 
 .PHONY: clean

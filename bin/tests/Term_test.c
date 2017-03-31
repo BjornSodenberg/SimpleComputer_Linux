@@ -1,4 +1,4 @@
-#include "../core/includes/Term/termlib.h"
+#include "../../core/includes/Term/termlib.h"
 
 int main() {
   int return_value;
