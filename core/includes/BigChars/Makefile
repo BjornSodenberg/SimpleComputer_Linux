@@ -7,7 +7,7 @@ INCLUDE = -I../Term
 .PHONY: clean
 
 all:
-	$(CC) $(INCLUDE) $(CFLAGS) -c $(SRCS)
+	$(CC) $(INCLUDE) $(CFLAGS) -c $(SRCS) -ltermlib
 	ar rvs ../../lib/libbigcharlib.a $(OBJS)
 
 clean:

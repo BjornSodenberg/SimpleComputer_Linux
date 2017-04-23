@@ -4,7 +4,7 @@ LFLAGS = -L./core/lib/
 
 .PHONY: clean
 
-all: sclib.a termlib.a bigcharlib.a readkeylib.a Anthill
+all: sclib.a termlib.a bigcharlib.a readkeylib.a Tests SimpleComputer
 
 sclib.a:
 	cd core/includes/SC/ && make all
@@ -21,7 +21,7 @@ readkeylib.a:
 Tests:
 	cd bin/tests && make all
 
-Anthill:
+SimpleComputer:
 	cd bin/ && make all
 
 clean:
@@ -30,5 +30,7 @@ clean:
 	cd core/includes/BigChars && make clean
 	cd core/includes/ReadKey && make clean
 	cd core/lib && rm -f *.a
+	cd bin/ && make clean
 	cd bin/tests && make clean
 	cd src && rm -f memory
+	rm -f SimpleComputer

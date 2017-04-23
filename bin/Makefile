@@ -4,17 +4,12 @@ INCLUDE = -I../core/includes/SC -I../core/includes/Term \
 -I../core/includes/BigChars -I../core/includes/ReadKey
 LIBS = -L../core/lib
 LFLAG = -lsclib -ltermlib -lbigcharlib -lreadkeylib
+SRCS = SimpleComputer.c
 
 .PHONY: clean
 
-all:initConsole.o Anthill
-
-Anthill:
-	$(CC) $(CFLAGS) $(INCLUDE) $(LIBS) -o Anthill \
-																Anthill.c $(LFLAG)
-
-initConsole.o:initConsole.c initConsole.h
-	$(CC) $(CFLAGS) $(INCLUDE) $(LIBS) -c initConsole.c
+all:
+	$(CC) $(INCLUDE) $(LIBS) $(CFLAGS) -o ../SimpleComputer $(SRCS) $(LFLAG)
 
 clean:
-	rm -f *.o
+	rm -f ../SimpleComputer memory

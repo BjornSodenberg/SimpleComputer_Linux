@@ -12,10 +12,10 @@ int main(int argc, char const *argv[]) {
 	sc_memoryGet(1, &mem1);
 	sc_memoryGet(3, &mem2);
 	printf("0?%X :: 5?%X\n", mem1, mem2);
-	sc_memorySave("../src/memory");
+	sc_memorySave("memory");
 	/* Меняем ячейку памяти, загружаем память в неизмененном состоянии */
 	sc_memorySet(3, 0x10);
-	sc_memoryLoad("../src/memory");
+	sc_memoryLoad("memory");
 	sc_memoryGet(3, &mem1);
 	printf("5?%X\n", mem1);
 	/* Проверка функций работы с регистром флагов */
