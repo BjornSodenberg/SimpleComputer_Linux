@@ -63,23 +63,18 @@ int reset();
 int change_inst(int *x, int *y);
 
 // SIGNAL
-int flg_rr = 0;
-int is_running = 1; 
 int Run = 1;
 void kr_run();
 void kr_step();
 int rise(int sig);
 void signalhandler(int sig);
-void signalusr(int sig);
 struct itimerval nval, oval;
 // ******
 
-//***********
+// CURSW
 int ALU (int, int);
-int CU (void);
-int read_mcell(int pos);
-int write_used, write_val;
-//***********
+int CU  (void);
+//******
 
 int main(int argc, char const *argv[]) {
   pos = 0;
@@ -95,9 +90,7 @@ int main(int argc, char const *argv[]) {
   print_boxes();
   print_labels();
   ip = 0;
-	signal(SIGALRM, signalhandler);
-	signal(SIGUSR1, signalusr);
-  if(Run ){
+  if(Run){
     while (1) {
       sc_regSet(flg_T, 1);
       pos = x*10+y;
@@ -111,20 +104,19 @@ int main(int argc, char const *argv[]) {
       t_flagbox();
       t_input();
       rk_readkey(&key);
-      sc_regGet(flg_T, &is_running);
       switch(key){
-        case l_key: {if (is_running == 1) Load(); break; }
-        case s_key: {if (is_running == 1) Save(); break; }
-        case up_key: { if (is_running == 1) x--; break; }
-        case down_key: { if (is_running == 1) x++; break; }
-        case left_key: { if (is_running == 1) y++; break; }
-        case right_key: { if (is_running == 1) y--; break; }
-        case i_key: { if (is_running == 1) reset(); break;}
-        case f5_key:  { if (is_running == 1) change_accum(); break; }
-        case f6_key:  { if (is_running == 1)change_inst(&x,&y);break; }
-        case enter_key: { if (is_running == 1) change_mcell(pos); break; }
-        case r_key: { if (is_running == 1)kr_run();  else { Run = 1; raise(SIGUSR1); } break; }
-        case t_key: { if (is_running == 1)kr_step(); break; }
+        case l_key: Load(); break;
+        case s_key: Save(); break;
+        case up_key: x--; break;
+        case down_key: x++; break;
+        case left_key: y++; break;
+        case right_key: y--; break;
+        case i_key: reset(); break;
+        case f5_key: change_accum(); break;
+        case f6_key: change_inst(&x,&y);break;
+        case enter_key: change_mcell(pos); break;
+        case r_key: kr_run(); break;
+        case t_key: kr_step(); break;
         default: break;
       }
     }
@@ -160,19 +152,18 @@ int change_inst(int *x, int *y){
 
 int reset()
 {
-  
-  //Run = 1;
+  Run = 1;
   x_i=0;
   y_i=0;
   x = 0;
   y = 0;
   accumulator = 0;
   sc_regSet(flg_P,0);
-  sc_regSet(flg_T,1);
+  sc_regSet(flg_T,0);
   sc_regSet(flg_O,0);
   sc_regSet(flg_E,0);
   sc_regSet(flg_M,0);
-  sc_memoryInit();
+  // sc_memoryInit();
 }
 
 int Load()
@@ -424,7 +415,7 @@ void print_mem(int *x,int *y)
           *y = 9;
       tl_gotoXY(2+i,3+j*6);
       pos = *x*10+*y;
-      ip= pos;
+      instructionCounter = pos;
       sprintf(instr_cntr,"%d",pos);
       mem = sc_memory[i*10+j] & 0x3FFF;
       command = (sc_memory[i*10+j] >> 14) & 1;
@@ -532,8 +523,13 @@ void kr_run()
     nval.it_value.tv_sec = 1;
     nval.it_value.tv_usec = 0;
     setitimer(ITIMER_REAL, &nval, &oval);
+    ip = instructionCounter;
 
   }
+    if(rk_readkey(&key) == i_key)
+    {
+        raise(SIGUSR1);
+    }
 }
 
 void kr_step()
@@ -548,10 +544,11 @@ void kr_step()
 void signalhandler(int sig)
 {
   
-  //rk_termregime(1, 1, 1, 0,1);
+//  rk_termregime(1, 1, 1, 0,1);
   if(Run == 0 && sig == SIGALRM ){
     if (ip + 1 <= reserve_memory) {
       sc_regSet(flg_T,0);
+      ip++;
       x = ip / 10;
       y = ip % 10;
       print_mem(&x, &y);
@@ -561,222 +558,16 @@ void signalhandler(int sig)
       t_operationbox();
       t_keybox();
       t_flagbox();
-      CU();
-      ip++;
     }
   }
 }
-void signalusr(int sig)
-{
-//  rk_termregime(1, 1, 1, 0,1);
-	alarm(0);
-	//reset();
-}
 
-int read_mcell(int pos)
+int ALU (int command, int operand)
 {
-	int plus_flag, num;
-	int command_d, operand_d, mem;
-
-	print_mem(&x, &y);
-    t_accumbox();
-    t_bcbox();
-    t_counterbox();
-    t_operationbox();
-    t_keybox();
-    t_flagbox();
-    t_input();
-	printf("READ: ");
-	if (scan_num(&plus_flag, &num) != 0) {
-		printf("Not a number!");
-		return -1;
-	}
-	if ((num >= 0) && (num < 0x8000)) {
-		if (plus_flag) {
-			if (((num >> 7) & 1) == 1) {
-				printf("Wrong instruction allign");
-				return -1;
-			}
-			command_d = (num >> 8) & 0x7F;
-			operand_d = num & 0x7F;
-			mem = (command_d << 7) | operand_d;
-		}
-		else 
-			mem = (1 << 14) | num;
-		if ((pos >= 0) && (pos < 100))
-			sc_memorySet(pos, mem);
-	}
-	else {
-		printf("Memory cell is 15 bit wide");
-		return -1;
-	}
-	return 0;
-}
-
-/*
- Реализует алгоритм работы арифметико-
-логического устройства. Если при выполнении функции возникла ошибка, которая не
-позволяет дальше выполнять программу, то функция возвращает -1, иначе 0;
- */
-int ALU (int comm, int oper)
-{
-    int tmp;
-    switch(comm)
-    {
-        case 0x30:
-        {
-            accumulator += sc_memory[oper];
-            break;
-        }
-        case 0x31:
-        {
-            if (((sc_memory[oper] >> 14) & 1) == 1)
-				tmp = sc_memory[oper] | (~0x7FFF);
-			else
-				tmp = sc_memory[oper];
-			accumulator -= tmp;
-			if ((accumulator > ((int)(~0x7FFF))) && (accumulator <= 0x7FFF)) {
-				accumulator &= 0x7FFF;
-			}
-            break;
-        }
-        case 0x32:
-        {
-            if (sc_memory[oper] != 0)
-				accumulator /= sc_memory[oper];
-			else {
-				sc_regSet(flg_P, 1);
-				return -1;
-			}
-            break;
-        }
-        case 0x33:
-        {
-            accumulator *= sc_memory[oper];
-            break;
-        }
-    if ((accumulator & 1) == 0)
-		sc_regSet(flg_O, 0);
-	else
-		sc_regSet(flg_O, 1);
-	if ((accumulator > 0x7FFF) || (accumulator < 0)) {
-		accumulator &= 0x7FFF;
-		sc_regSet(flg_M, 1);
-	}
-	else
-		sc_regSet(flg_P, 0);
-	sc_regSet(flg_O, accumulator & 1);
-    }
     return 0;
 }
-/*
- обеспечивает работу устройства управления.
- */
+
 int CU (void)
 {
-    int command_d, operand_d;
-    int flag, read_suc;
-    
-    if (ip >= reserve_memory)
-    {
-        sc_regSet(flg_M,1);
-        sc_regSet(flg_T,1);
-        return -1;
-    }
-    if(sc_commandDecode(sc_memory[ip],&command_d, &operand_d) != 0)
-    {
-        sc_regSet(flg_E,1);
-        sc_regSet(flg_T,1);
-        
-        return -1;
-    }
-    if(operand < 0 && operand >= reserve_memory)
-    {
-        sc_regSet(flg_E,1);
-        sc_regSet(flg_T,1);
-        return -1;
-    }
-    if(command >= 0x30 && command <= 0x33)
-    {
-        if(ALU(command_d,operand_d) != 0)
-            sc_regSet(flg_T,1);
-    }
-    else
-    {
-        switch(command)
-        {
-            case 0x10://READ
-            {
-                do{
-                    read_suc = read_mcell(operand_d);  
-                }while(read_suc != 0);
-                break;
-            }
-                
-            case 0x11://WRITE
-            {
-                write_used = 1;
-                write_val = sc_memory[operand_d];
-                break;
-            }
-            case 0x20://LOAD
-            {
-                accumulator = sc_memory[operand_d];
-                break;
-            }
-            case 0x21://STORE
-            {
-                sc_memory[operand_d] = accumulator;
-                break;
-            }
-            case 0x40://JUMP
-            {
-                ip = operand_d-1;
-                break;
-            }
-            case 0x41://JNEG
-            {
-                if(((accumulator >> 14) & 1)==1)
-                    ip = operand_d - 1;
-                break;
-            }
-            case 0x42://JZ
-            {
-                if(accumulator == 0)
-                    ip = operand_d - 1;
-                break;
-            }
-            case 0x43://HALT
-            {
-                sc_regSet(flg_T,1);
-                break;
-            }
-            case 0x59://JNP
-            {
-                sc_regGet(flg_P,&flag);
-                if(flag == 1)
-                    ip = operand - 1;
-                break;
-            }      
-        }
-    }
     return 0;
 }
-
-
-/*
- Обработку команд осуществляет устройство управления. Функция CU вызывается либо обра-
-ботчиком сигнала от системного таймера, если не установлен флаг «игнорирование тактовых им-
-пульсов», либо при нажатии на клавишу t. Алгоритм работы функции следующий:
-    1. из оперативной памяти считывается ячейка, адрес которой храниться в регистре instruc-
-tionCounter;
-    2. полученное значение декодируется как команда;
-    3. если декодирование невозможно, то устанавливаются флаги «указана неверная команда» и
-«игнорирование тактовых импульсов» (системный таймер можно отключить) и работа
-функции прекращается.
-    4. Если получена арифметическая или логическая операция, то вызывается функция ALU,
-иначе команда выполняется самим устройством управления.
-    5. Определяется, какая команда должна быть выполнена следующей и адрес еѐ ячейки памя-
-ти заносится в регистр instructionCounter.
-    6. Работа функции завершается.
- */

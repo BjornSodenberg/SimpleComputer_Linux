@@ -1,0 +1,65 @@
+cd core/includes/SC/ && make all
+make[1]: Entering directory '/home/bjornsod/workspace/SimpleComputer_Linux/core/includes/SC'
+gcc -g -c sc_memoryInit.c sc_memorySave.c sc_memoryGet.c sc_memoryLoad.c sc_memorySet.c  sc_regInit.c sc_regSet.c sc_regGet.c sc_commandDecode.c sc_commandEncode.c int_cmp.c const.c
+ar rvs ../../lib/libsclib.a sc_memoryInit.o sc_memorySave.o sc_memoryGet.o sc_memoryLoad.o sc_memorySet.o sc_regInit.o sc_regSet.o sc_regGet.o sc_commandDecode.o sc_commandEncode.o int_cmp.o const.o
+ar: creating ../../lib/libsclib.a
+a - sc_memoryInit.o
+a - sc_memorySave.o
+a - sc_memoryGet.o
+a - sc_memoryLoad.o
+a - sc_memorySet.o
+a - sc_regInit.o
+a - sc_regSet.o
+a - sc_regGet.o
+a - sc_commandDecode.o
+a - sc_commandEncode.o
+a - int_cmp.o
+a - const.o
+make[1]: Leaving directory '/home/bjornsod/workspace/SimpleComputer_Linux/core/includes/SC'
+cd core/includes/Term/ && make all
+make[1]: Entering directory '/home/bjornsod/workspace/SimpleComputer_Linux/core/includes/Term'
+gcc -g -c tl_clrscr.c tl_getscreensize.c tl_gotoXY.c tl_setfgcolor.c tl_setbgcolor.c
+ar rvs ../../lib/libtermlib.a tl_clrscr.o tl_getscreensize.o tl_gotoXY.o tl_setfgcolor.o tl_setbgcolor.o
+ar: creating ../../lib/libtermlib.a
+a - tl_clrscr.o
+a - tl_getscreensize.o
+a - tl_gotoXY.o
+a - tl_setfgcolor.o
+a - tl_setbgcolor.o
+make[1]: Leaving directory '/home/bjornsod/workspace/SimpleComputer_Linux/core/includes/Term'
+cd core/includes/BigChars/ && make all
+make[1]: Entering directory '/home/bjornsod/workspace/SimpleComputer_Linux/core/includes/BigChars'
+gcc -I../Term -g -Wall -c bc_bigcharread.c bc_bigcharwrite.c bc_box.c bc_getbigcharpos.c bc_printA.c bc_printbigchar.c bc_setbigcharpos.c -ltermlib
+ar rvs ../../lib/libbigcharlib.a bc_bigcharread.o bc_bigcharwrite.o bc_box.o bc_getbigcharpos.o bc_printA.o bc_printbigchar.o bc_setbigcharpos.o
+ar: creating ../../lib/libbigcharlib.a
+a - bc_bigcharread.o
+a - bc_bigcharwrite.o
+a - bc_box.o
+a - bc_getbigcharpos.o
+a - bc_printA.o
+a - bc_printbigchar.o
+a - bc_setbigcharpos.o
+make[1]: Leaving directory '/home/bjornsod/workspace/SimpleComputer_Linux/core/includes/BigChars'
+cd core/includes/ReadKey/ && make all
+make[1]: Entering directory '/home/bjornsod/workspace/SimpleComputer_Linux/core/includes/ReadKey'
+gcc  -g -Wall -c rk_readkey.c rk_termregime.c rk_termrestore.c rk_termsave.c
+ar rvs ../../lib/libreadkeylib.a rk_readkey.o rk_termregime.o rk_termrestore.o rk_termsave.o
+ar: creating ../../lib/libreadkeylib.a
+a - rk_readkey.o
+a - rk_termregime.o
+a - rk_termrestore.o
+a - rk_termsave.o
+make[1]: Leaving directory '/home/bjornsod/workspace/SimpleComputer_Linux/core/includes/ReadKey'
+cd bin/tests && make all
+make[1]: Entering directory '/home/bjornsod/workspace/SimpleComputer_Linux/bin/tests'
+gcc -g -I../../core/includes/SC -I../../core/includes/Term -I../../core/includes/BigChars -L../../core/lib -o SimpleComputer_test \
+															SimpleComputer_test.c -lsclib -ltermlib -lbigcharlib
+gcc -g -I../../core/includes/SC -I../../core/includes/Term -I../../core/includes/BigChars -L../../core/lib -o Term_test \
+															Term_test.c -lsclib -ltermlib -lbigcharlib
+gcc -g -I../../core/includes/SC -I../../core/includes/Term -I../../core/includes/BigChars -L../../core/lib -o Console_init \
+															Console_init.c -lbigcharlib -ltermlib
+make[1]: Leaving directory '/home/bjornsod/workspace/SimpleComputer_Linux/bin/tests'
+cd bin/ && make all
+make[1]: Entering directory '/home/bjornsod/workspace/SimpleComputer_Linux/bin'
+gcc -I../core/includes/SC -I../core/includes/Term -I../core/includes/BigChars -I../core/includes/ReadKey -L../core/lib -g -o ../SimpleComputer SimpleComputer.c -lsclib -ltermlib -lbigcharlib -lreadkeylib
+make[1]: Leaving directory '/home/bjornsod/workspace/SimpleComputer_Linux/bin'

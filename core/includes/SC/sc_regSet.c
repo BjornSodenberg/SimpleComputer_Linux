@@ -2,7 +2,6 @@
 
 int sc_regSet(int registr, int value)
 {
-
 	if ((registr > 0) && (registr < 6)) {
 		if (value == 1)
 			BIT_SET(sc_reg_flags, registr);

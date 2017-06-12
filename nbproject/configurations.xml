@@ -1,0 +1,273 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurationDescriptor version="100">
+  <logicalFolder name="root" displayName="root" projectFiles="true" kind="ROOT">
+    <df root="." name="0">
+      <df name="bin">
+        <df name="tests">
+          <in>Console_init.c</in>
+          <in>SimpleComputer_test.c</in>
+          <in>Term_test.c</in>
+        </df>
+        <in>SimpleComputer.c</in>
+      </df>
+      <df name="core">
+        <df name="includes">
+          <df name="BigChars">
+            <in>bc_bigcharread.c</in>
+            <in>bc_bigcharwrite.c</in>
+            <in>bc_box.c</in>
+            <in>bc_getbigcharpos.c</in>
+            <in>bc_printA.c</in>
+            <in>bc_printbigchar.c</in>
+            <in>bc_setbigcharpos.c</in>
+          </df>
+          <df name="ReadKey">
+            <in>rk_readkey.c</in>
+            <in>rk_termregime.c</in>
+            <in>rk_termrestore.c</in>
+            <in>rk_termsave.c</in>
+          </df>
+          <df name="SC">
+            <in>const.c</in>
+            <in>int_cmp.c</in>
+            <in>sc_commandDecode.c</in>
+            <in>sc_commandEncode.c</in>
+            <in>sc_memoryGet.c</in>
+            <in>sc_memoryInit.c</in>
+            <in>sc_memoryLoad.c</in>
+            <in>sc_memorySave.c</in>
+            <in>sc_memorySet.c</in>
+            <in>sc_regGet.c</in>
+            <in>sc_regInit.c</in>
+            <in>sc_regSet.c</in>
+          </df>
+          <df name="Term">
+            <in>tl_clrscr.c</in>
+            <in>tl_getscreensize.c</in>
+            <in>tl_gotoXY.c</in>
+            <in>tl_setbgcolor.c</in>
+            <in>tl_setfgcolor.c</in>
+          </df>
+        </df>
+      </df>
+    </df>
+    <logicalFolder name="ExternalFiles"
+                   displayName="Important Files"
+                   projectFiles="false"
+                   kind="IMPORTANT_FILES_FOLDER">
+      <itemPath>Makefile</itemPath>
+      <itemPath>nbproject/private/launcher.properties</itemPath>
+    </logicalFolder>
+  </logicalFolder>
+  <sourceFolderFilter>^(nbproject)$</sourceFolderFilter>
+  <sourceRootList>
+    <Elem>.</Elem>
+  </sourceRootList>
+  <projectmakefile>Makefile</projectmakefile>
+  <confs>
+    <conf name="Default" type="0">
+      <toolsSet>
+        <compilerSet>default</compilerSet>
+        <dependencyChecking>false</dependencyChecking>
+        <rebuildPropChanged>false</rebuildPropChanged>
+      </toolsSet>
+      <flagsDictionary>
+        <element flagsID="0" commonFlags="-g"/>
+      </flagsDictionary>
+      <codeAssistance>
+      </codeAssistance>
+      <makefileType>
+        <makeTool>
+          <buildCommandWorkingDir>.</buildCommandWorkingDir>
+          <buildCommand>${MAKE} -f Makefile</buildCommand>
+          <cleanCommand>${MAKE} -f Makefile clean</cleanCommand>
+          <executablePath></executablePath>
+        </makeTool>
+        <preBuild>
+          <preBuildCommandWorkingDir>.</preBuildCommandWorkingDir>
+          <preBuildCommand></preBuildCommand>
+        </preBuild>
+      </makefileType>
+      <item path="bin/SimpleComputer.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+          <incDir>
+            <pElem>core/includes/ReadKey</pElem>
+          </incDir>
+        </cTool>
+      </item>
+      <item path="bin/tests/Console_init.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="bin/tests/SimpleComputer_test.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="bin/tests/Term_test.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="core/includes/BigChars/bc_bigcharread.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="core/includes/BigChars/bc_bigcharwrite.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="core/includes/BigChars/bc_box.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="core/includes/BigChars/bc_getbigcharpos.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="core/includes/BigChars/bc_printA.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="core/includes/BigChars/bc_printbigchar.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="core/includes/BigChars/bc_setbigcharpos.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="core/includes/ReadKey/rk_readkey.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="core/includes/ReadKey/rk_termregime.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="core/includes/ReadKey/rk_termrestore.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="core/includes/ReadKey/rk_termsave.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="core/includes/SC/const.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="core/includes/SC/int_cmp.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="core/includes/SC/sc_commandDecode.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="core/includes/SC/sc_commandEncode.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="core/includes/SC/sc_memoryGet.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="core/includes/SC/sc_memoryInit.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="core/includes/SC/sc_memoryLoad.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="core/includes/SC/sc_memorySave.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="core/includes/SC/sc_memorySet.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="core/includes/SC/sc_regGet.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="core/includes/SC/sc_regInit.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="core/includes/SC/sc_regSet.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="core/includes/Term/tl_clrscr.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="core/includes/Term/tl_getscreensize.c"
+            ex="false"
+            tool="0"
+            flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="core/includes/Term/tl_gotoXY.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="core/includes/Term/tl_setbgcolor.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <item path="core/includes/Term/tl_setfgcolor.c" ex="false" tool="0" flavor2="0">
+        <cTool flags="0">
+        </cTool>
+      </item>
+      <folder path="0/bin">
+        <cTool>
+          <incDir>
+            <pElem>core/includes/SC</pElem>
+            <pElem>core/includes/Term</pElem>
+            <pElem>core/includes/BigChars</pElem>
+          </incDir>
+        </cTool>
+      </folder>
+      <folder path="0/core/includes/BigChars">
+        <cTool>
+          <incDir>
+            <pElem>core/includes/Term</pElem>
+          </incDir>
+        </cTool>
+      </folder>
+    </conf>
+  </confs>
+</configurationDescriptor>
