@@ -425,7 +425,7 @@ void print_mem(int *x,int *y)
       tl_gotoXY(2+i,3+j*6);
       pos = *x*10+*y;
       ip= pos;
-      sprintf(instr_cntr,"%d",pos);
+      sprintf(instr_cntr,"%d",ip);
       mem = sc_memory[i*10+j] & 0x3FFF;
       command = (sc_memory[i*10+j] >> 14) & 1;
       opcode = (mem >> 7) & 0x7F;
@@ -475,13 +475,13 @@ void t_accumbox()
     int mem;
     int k = 0;
     int pos;
+
     if (accumulator == 0){
       sprintf(accum,"+0000");
     }
     else {
       mem = accumulator & 0x3FFF;
       command = (accumulator >> 14) & 1;
-
       if (command == 0) {
           sprintf(accum,"+%X", mem);
       }
@@ -676,34 +676,41 @@ int CU (void)
 {
     int command_d, operand_d;
     int flag, read_suc;
-    
+    char buff[2];
     if (ip >= reserve_memory)
     {
         sc_regSet(flg_M,1);
         sc_regSet(flg_T,1);
         return -1;
     }
-    if(sc_commandDecode(sc_memory[ip],&command_d, &operand_d) != 0)
+//    if(sc_commandDecode(sc_memory[ip],&command_d, &operand_d) != 0)
+//    {
+//        sc_regSet(flg_E,1);
+//        sc_regSet(flg_T,1);
+//        
+//        return -1;
+//    }
+    int mem_d;
+    mem_d = sc_memory[ip] & 0x3FFF;
+    command_d = (mem_d >> 7) & 0x7F;
+    operand_d = mem_d & 0x7F;
+    if(operand_d < 0 && operand_d >= reserve_memory)
     {
         sc_regSet(flg_E,1);
         sc_regSet(flg_T,1);
-        
         return -1;
     }
-    if(operand < 0 && operand >= reserve_memory)
-    {
-        sc_regSet(flg_E,1);
-        sc_regSet(flg_T,1);
-        return -1;
-    }
-    if(command >= 0x30 && command <= 0x33)
+    if(command_d >= 0x30 && command_d <= 0x33)
     {
         if(ALU(command_d,operand_d) != 0)
             sc_regSet(flg_T,1);
     }
     else
     {
-        switch(command)
+        sprintf(buff,"%x",operand_d);
+        operand_d = atoi(buff);
+        write(1,buff,2);
+        switch(command_d)
         {
             case 0x10://READ
             {
